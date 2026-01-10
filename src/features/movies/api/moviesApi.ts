@@ -1,9 +1,9 @@
 import tmdbApi from "../../../api/tmdbApi";
-import type { MovieResponse } from "../types";
+import type { MovieDetail, MoviesResponse } from "../types";
 
 const moviesApi = tmdbApi.injectEndpoints({
   endpoints: (builder) => ({
-    getNowPlaying: builder.query<MovieResponse, void>({
+    getNowPlaying: builder.query<MoviesResponse, void>({
       query: () => "movie/now_playing",
       providesTags: ["Movie"],
     }),
