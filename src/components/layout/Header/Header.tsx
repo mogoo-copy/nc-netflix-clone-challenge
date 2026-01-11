@@ -74,7 +74,7 @@ interface IForm {
 
 function Header() {
   const homeMatch = useMatch("/");
-  const tvMatch = useMatch("tv");
+  const tvMatch = useMatch("tvs");
   const [searchOpen, setSearchOpen] = useState(false);
   const { scrollY } = useScroll();
   const navScrollControls = useAnimation();
@@ -128,13 +128,13 @@ function Header() {
         </Logo>
         <Items>
           <Item>
-            <Link to="/">
+            <Link to="/" onClick={() => window.scrollTo({ top: 0 })}>
               Home
               {homeMatch && <ItemBottomBar layoutId="itemBottomBar" transition={barTransition} />}
             </Link>
           </Item>
           <Item>
-            <Link to="/tv">
+            <Link to="/tvs" onClick={() => window.scrollTo({ top: 0 })}>
               Tv Shows
               {tvMatch && <ItemBottomBar layoutId="itemBottomBar" transition={barTransition} />}
             </Link>

@@ -7,16 +7,16 @@ const moviesApi = tmdbApi.injectEndpoints({
       query: () => "tv/airing_today",
       providesTags: ["Tv"],
     }),
-    getPopular: builder.query<TvsResponse, void>({
+    getTvPopular: builder.query<TvsResponse, void>({
       query: () => "tv/popular",
       providesTags: ["Tv"],
     }),
-    getTopRated: builder.query<TvsResponse, void>({
+    getTvTopRated: builder.query<TvsResponse, void>({
       query: () => "tv/top_rated",
       providesTags: ["Tv"],
     }),
     getOnTheAir: builder.query<TvsResponse, void>({
-      query: () => "tv/OnTheAir",
+      query: () => "tv/on_the_air",
       providesTags: ["Tv"],
     }),
   }),
@@ -24,7 +24,7 @@ const moviesApi = tmdbApi.injectEndpoints({
 
 export const {
   useGetAiringTodayQuery,
-  useGetPopularQuery,
-  useGetTopRatedQuery,
+  useGetTvPopularQuery,
+  useGetTvTopRatedQuery,
   useGetOnTheAirQuery,
 } = moviesApi;
