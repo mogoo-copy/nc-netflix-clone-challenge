@@ -77,7 +77,7 @@ function MovieLists() {
                     layoutId={String(movie.id) + "latest"}
                   >
                     <SliderBoxImg
-                      layoutId={movie.backdrop_path + "latest"}
+                      layoutId={movie.backdrop_path + String(movie.id) + "latest"}
                       $bgPhoto={makeImagePath(movie.poster_path)}
                       transition={{ type: "tween" }}
                     />
@@ -98,7 +98,7 @@ function MovieLists() {
                     layoutId={String(movie.id) + "popular"}
                   >
                     <SliderBoxImg
-                      layoutId={movie.backdrop_path + "popular"}
+                      layoutId={movie.backdrop_path + String(movie.id) + "popular"}
                       $bgPhoto={makeImagePath(movie.poster_path)}
                       transition={{ type: "tween" }}
                     />
@@ -119,7 +119,7 @@ function MovieLists() {
                     layoutId={String(movie.id) + "top"}
                   >
                     <SliderBoxImg
-                      layoutId={movie.backdrop_path + "top"}
+                      layoutId={movie.backdrop_path + String(movie.id) + "top"}
                       $bgPhoto={makeImagePath(movie.poster_path)}
                       transition={{ type: "tween" }}
                     />
@@ -140,7 +140,7 @@ function MovieLists() {
                     layoutId={String(movie.id) + "upcoming"}
                   >
                     <SliderBoxImg
-                      layoutId={movie.backdrop_path + "upcoming"}
+                      layoutId={movie.backdrop_path + String(movie.id) + "upcoming"}
                       $bgPhoto={makeImagePath(movie.poster_path)}
                       transition={{ type: "tween" }}
                     />

@@ -1,7 +1,7 @@
 import tmdbApi from "../../../api/tmdbApi";
 import type { TvDetail, TvsResponse } from "../types";
 
-const moviesApi = tmdbApi.injectEndpoints({
+const tvsApi = tmdbApi.injectEndpoints({
   endpoints: (builder) => ({
     getAiringToday: builder.query<TvsResponse, void>({
       query: () => "tv/airing_today",
@@ -32,4 +32,4 @@ export const {
   useGetTvTopRatedQuery,
   useGetOnTheAirQuery,
   useGetTvDetailQuery,
-} = moviesApi;
+} = tvsApi;

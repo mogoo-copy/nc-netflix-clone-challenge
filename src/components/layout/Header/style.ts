@@ -78,7 +78,7 @@ export const SearchInput = styled(motion.input)`
   outline: none;
   border-radius: 5px;
   transform-origin: right center;
-  min-width: 230px;
+  min-width: 280px;
   padding: 5px 10px;
   padding-left: 40px;
   font-size: 16px;

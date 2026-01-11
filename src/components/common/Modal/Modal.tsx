@@ -9,6 +9,7 @@ import { makeImagePath } from "../../../utils/imageUtils";
 
 import type { Movie } from "../../../features/movies/types";
 import type { Tv } from "../../../features/tvs/types";
+import type { MovieResult, TvResult } from "../../../features/search/types";
 
 import {
   AddBtn,
@@ -25,7 +26,7 @@ import {
 } from "./style";
 
 interface ModalProps {
-  clickedSliderBox: Movie | Tv | undefined;
+  clickedSliderBox: Movie | Tv | MovieResult | TvResult | undefined;
   slider: string;
   isMovie: boolean;
 }
@@ -64,10 +65,10 @@ function Modal({ clickedSliderBox, slider, isMovie }: ModalProps) {
         transition={{ type: "tween" }}
       >
         <ModalImg
-          layoutId={clickedSliderBox.backdrop_path + slider}
+          layoutId={clickedSliderBox.backdrop_path + String(clickedSliderBox.id) + slider}
           style={{
             backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-              clickedSliderBox.backdrop_path || "",
+              clickedSliderBox.backdrop_path || clickedSliderBox.poster_path || "",
               "w500"
             )})`,
             originX: 0.5,
@@ -77,7 +78,9 @@ function Modal({ clickedSliderBox, slider, isMovie }: ModalProps) {
         />
         <TitleArea>
           <ModalTitle>
-            {isMovie ? (clickedSliderBox as Movie).title : (clickedSliderBox as Tv).name}
+            {isMovie
+              ? (clickedSliderBox as Movie | MovieResult).title
+              : (clickedSliderBox as Tv | TvResult).name}
           </ModalTitle>
           <BtnRow>
             <PlayBtn>
@@ -92,7 +95,7 @@ function Modal({ clickedSliderBox, slider, isMovie }: ModalProps) {
             </LikeBtn>
             <Average>
               <FontAwesomeIcon icon={faStar} />
-              {clickedSliderBox.vote_average.toFixed(1)}
+              {clickedSliderBox.vote_average?.toFixed(1) || 0}
             </Average>
           </BtnRow>
         </TitleArea>

@@ -77,7 +77,7 @@ function TvLists() {
                     layoutId={String(tv.id) + "airingToday"}
                   >
                     <SliderBoxImg
-                      layoutId={tv.backdrop_path + "airingToday"}
+                      layoutId={tv.backdrop_path + String(tv.id) + "airingToday"}
                       $bgPhoto={makeImagePath(tv.poster_path)}
                       transition={{ type: "tween" }}
                     />
@@ -98,7 +98,7 @@ function TvLists() {
                     layoutId={String(tv.id) + "popular"}
                   >
                     <SliderBoxImg
-                      layoutId={tv.backdrop_path + "popular"}
+                      layoutId={tv.backdrop_path + String(tv.id) + "popular"}
                       $bgPhoto={makeImagePath(tv.poster_path)}
                       transition={{ type: "tween" }}
                     />
@@ -119,7 +119,7 @@ function TvLists() {
                     layoutId={String(tv.id) + "top"}
                   >
                     <SliderBoxImg
-                      layoutId={tv.backdrop_path + "top"}
+                      layoutId={tv.backdrop_path + String(tv.id) + "top"}
                       $bgPhoto={makeImagePath(tv.poster_path)}
                       transition={{ type: "tween" }}
                     />
@@ -140,7 +140,7 @@ function TvLists() {
                     layoutId={String(tv.id) + "onTheAir"}
                   >
                     <SliderBoxImg
-                      layoutId={tv.backdrop_path + "onTheAir"}
+                      layoutId={tv.backdrop_path + String(tv.id) + "onTheAir"}
                       $bgPhoto={makeImagePath(tv.poster_path)}
                       transition={{ type: "tween" }}
                     />
