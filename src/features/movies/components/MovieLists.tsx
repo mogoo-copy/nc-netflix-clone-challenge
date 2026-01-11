@@ -1,5 +1,6 @@
-import type { Variants } from "motion/react";
-import { useNavigate } from "react-router-dom";
+import { AnimatePresence, type Variants } from "motion/react";
+import { useMatch, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import {
   useGetNowPlayingQuery,
@@ -18,6 +19,8 @@ import {
   WrapperDiv,
   WrapperSlider,
 } from "./MovieLists.style";
+import type { MoviesResponse } from "../types";
+import Modal from "../../../components/common/Modal";
 
 const sliderBoxVariants: Variants = {
   hover: {
@@ -35,11 +38,22 @@ function MovieLists() {
   const { data: topRatedData, isLoading: topRatedLoading } = useGetTopRatedQuery();
   const { data: upcomingData, isLoading: upcomingLoading } = useGetUpcomingQuery();
 
-  const navigate = useNavigate();
+  const [chosenData, setChosenData] = useState<MoviesResponse | undefined>(undefined);
+  const [chosenSlider, setChosenSlider] = useState<string>("");
 
-  const handleClickSliderBox = (movieId: number) => () => {
-    navigate(`/movies/${movieId}`);
-  };
+  const navigate = useNavigate();
+  const movieModalMatch = useMatch("/movies/:movieId");
+
+  const clickedSliderBox =
+    movieModalMatch?.params.movieId &&
+    chosenData?.results.find((movie) => String(movie.id) === movieModalMatch.params.movieId);
+
+  const handleClickSliderBox =
+    (movieId: number, movieData: MoviesResponse, slider: string) => () => {
+      setChosenData(movieData);
+      setChosenSlider(slider);
+      navigate(`/movies/${movieId}`);
+    };
 
   const isLoading = nowPlayingLoading || popularLoading || topRatedLoading || upcomingLoading;
 
@@ -59,7 +73,7 @@ function MovieLists() {
                     variants={sliderBoxVariants}
                     whileHover="hover"
                     transition={{ type: "tween" }}
-                    onClick={handleClickSliderBox(movie.id)}
+                    onClick={handleClickSliderBox(movie.id, nowPlayingData, "latest")}
                     layoutId={String(movie.id) + "latest"}
                   >
                     <SliderBoxImg
@@ -80,7 +94,7 @@ function MovieLists() {
                     variants={sliderBoxVariants}
                     whileHover="hover"
                     transition={{ type: "tween" }}
-                    onClick={handleClickSliderBox(movie.id)}
+                    onClick={handleClickSliderBox(movie.id, popularData, "popular")}
                     layoutId={String(movie.id) + "popular"}
                   >
                     <SliderBoxImg
@@ -101,7 +115,7 @@ function MovieLists() {
                     variants={sliderBoxVariants}
                     whileHover="hover"
                     transition={{ type: "tween" }}
-                    onClick={handleClickSliderBox(movie.id)}
+                    onClick={handleClickSliderBox(movie.id, topRatedData, "top")}
                     layoutId={String(movie.id) + "top"}
                   >
                     <SliderBoxImg
@@ -122,7 +136,7 @@ function MovieLists() {
                     variants={sliderBoxVariants}
                     whileHover="hover"
                     transition={{ type: "tween" }}
-                    onClick={handleClickSliderBox(movie.id)}
+                    onClick={handleClickSliderBox(movie.id, upcomingData, "upcoming")}
                     layoutId={String(movie.id) + "upcoming"}
                   >
                     <SliderBoxImg
@@ -135,6 +149,11 @@ function MovieLists() {
               </Slider>
             </WrapperSlider>
           </Container>
+          <AnimatePresence>
+            {movieModalMatch ? (
+              <Modal clickedSliderBox={clickedSliderBox} slider={chosenSlider} />
+            ) : null}
+          </AnimatePresence>
         </>
       )}
     </WrapperDiv>
