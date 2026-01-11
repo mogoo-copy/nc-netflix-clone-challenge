@@ -7,7 +7,24 @@ const moviesApi = tmdbApi.injectEndpoints({
       query: () => "movie/now_playing",
       providesTags: ["Movie"],
     }),
+    getPopular: builder.query<MoviesResponse, void>({
+      query: () => "movie/popular",
+      providesTags: ["Movie"],
+    }),
+    getTopRated: builder.query<MoviesResponse, void>({
+      query: () => "movie/top_rated",
+      providesTags: ["Movie"],
+    }),
+    getUpcoming: builder.query<MoviesResponse, void>({
+      query: () => "movie/upcoming",
+      providesTags: ["Movie"],
+    }),
   }),
 });
 
-export const { useGetNowPlayingQuery } = moviesApi;
+export const {
+  useGetNowPlayingQuery,
+  useGetPopularQuery,
+  useGetTopRatedQuery,
+  useGetUpcomingQuery,
+} = moviesApi;
