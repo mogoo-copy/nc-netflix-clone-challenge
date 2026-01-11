@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export const WrapperDiv = styled.div`
-  background-color: ${(props) => props.theme.black.darker};
+  background-color: ${(props) => props.theme.black.veryDark};
 `;
 
 export const LoaderDiv = styled.div`
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const BannerDiv = styled.div<{ $bgPhoto: string }>`
-  height: 100vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
