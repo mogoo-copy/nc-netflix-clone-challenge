@@ -1,22 +1,50 @@
 import { useScroll } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
 import { makeImagePath } from "../../../utils/imageUtils";
+
 import type { Movie } from "../../../features/movies/types";
-import { ModalDescription, ModalImg, ModalTitle, Overlay, SliderBoxModal } from "./style";
+import type { Tv } from "../../../features/tvs/types";
+
+import {
+  AddBtn,
+  Average,
+  BtnRow,
+  LikeBtn,
+  ModalDescription,
+  ModalImg,
+  ModalTitle,
+  Overlay,
+  PlayBtn,
+  SliderBoxModal,
+  TitleArea,
+} from "./style";
 
 interface ModalProps {
-  clickedSliderBox: Movie | undefined | "";
+  clickedSliderBox: Movie | Tv | undefined;
   slider: string;
+  isMovie: boolean;
 }
 
-function Modal({ clickedSliderBox, slider }: ModalProps) {
+function Modal({ clickedSliderBox, slider, isMovie }: ModalProps) {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
 
   const handleClickOverlay = () => {
-    navigate("/", { replace: true });
+    navigate(-1);
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   if (!clickedSliderBox) return null;
 
@@ -39,7 +67,7 @@ function Modal({ clickedSliderBox, slider }: ModalProps) {
           layoutId={clickedSliderBox.backdrop_path + slider}
           style={{
             backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-              clickedSliderBox.backdrop_path,
+              clickedSliderBox.backdrop_path || "",
               "w500"
             )})`,
             originX: 0.5,
@@ -47,7 +75,27 @@ function Modal({ clickedSliderBox, slider }: ModalProps) {
           }}
           transition={{ type: "tween" }}
         />
-        <ModalTitle>{clickedSliderBox.title}</ModalTitle>
+        <TitleArea>
+          <ModalTitle>
+            {isMovie ? (clickedSliderBox as Movie).title : (clickedSliderBox as Tv).name}
+          </ModalTitle>
+          <BtnRow>
+            <PlayBtn>
+              <FontAwesomeIcon icon={faPlay} />
+              Play
+            </PlayBtn>
+            <AddBtn>
+              <FontAwesomeIcon icon={faPlus} />
+            </AddBtn>
+            <LikeBtn>
+              <FontAwesomeIcon icon={faThumbsUp} />
+            </LikeBtn>
+            <Average>
+              <FontAwesomeIcon icon={faStar} />
+              {clickedSliderBox.vote_average.toFixed(1)}
+            </Average>
+          </BtnRow>
+        </TitleArea>
         <ModalDescription>{clickedSliderBox.overview}</ModalDescription>
       </SliderBoxModal>
     </>

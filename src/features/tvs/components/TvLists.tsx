@@ -45,9 +45,9 @@ function TvLists() {
   const navigate = useNavigate();
   const tvModalMatch = useMatch("/tvs/:tvId");
 
-  const clickedSliderBox =
-    tvModalMatch?.params.tvId &&
-    chosenData?.results.find((tv) => String(tv.id) === tvModalMatch.params.tvId);
+  const clickedSliderBox = tvModalMatch?.params.tvId
+    ? chosenData?.results.find((tv) => String(tv.id) === tvModalMatch.params.tvId)
+    : undefined;
 
   const handleClickSliderBox = (tvId: number, tvData: TvsResponse, slider: string) => () => {
     setChosenData(tvData);
@@ -150,9 +150,9 @@ function TvLists() {
             </WrapperSlider>
           </Container>
           <AnimatePresence>
-            {/* {tvModalMatch ? (
-              <Modal clickedSliderBox={clickedSliderBox} slider={chosenSlider} />
-            ) : null} */}
+            {tvModalMatch ? (
+              <Modal clickedSliderBox={clickedSliderBox} slider={chosenSlider} isMovie={false} />
+            ) : null}
           </AnimatePresence>
         </>
       )}

@@ -19,6 +19,10 @@ const moviesApi = tmdbApi.injectEndpoints({
       query: () => "tv/on_the_air",
       providesTags: ["Tv"],
     }),
+    getTvDetail: builder.query<TvDetail, string>({
+      query: (tvId) => `tv/${tvId}`,
+      providesTags: ["Tv"],
+    }),
   }),
 });
 
@@ -27,4 +31,5 @@ export const {
   useGetTvPopularQuery,
   useGetTvTopRatedQuery,
   useGetOnTheAirQuery,
+  useGetTvDetailQuery,
 } = moviesApi;

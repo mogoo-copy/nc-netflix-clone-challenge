@@ -9,7 +9,8 @@ export const SliderBoxModal = styled(motion.div)`
   right: 0;
   margin: 0 auto;
   overflow: hidden;
-  background-color: ${(props) => props.theme.black.lighter};
+  background-color: ${(props) => props.theme.black.veryDark};
+  z-index: 6;
 `;
 
 export const ModalImg = styled(motion.div)`
@@ -19,12 +20,71 @@ export const ModalImg = styled(motion.div)`
   background-position: center center;
 `;
 
+export const TitleArea = styled.div`
+  position: relative;
+  top: -130px;
+  padding: 20px;
+`;
+
 export const ModalTitle = styled.h3`
   font-size: 46px;
-  position: relative;
-  top: -100px;
+
   color: ${(props) => props.theme.white.lighter};
-  padding: 20px;
+`;
+
+export const BtnRow = styled.div`
+  padding: 10px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+`;
+
+export const PlayBtn = styled.button`
+  cursor: pointer;
+  outline: none;
+  border: none;
+  height: 30px;
+  width: 80px;
+  :first-child {
+    font-size: 20px;
+  }
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  margin-right: 10px;
+  border-radius: 5px;
+`;
+
+export const AddBtn = styled.button`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: ${(props) => props.theme.white.lighter};
+  background-color: transparent;
+  outline: none;
+  margin-right: 10px;
+  border: 1px solid ${(props) => props.theme.white.lighter};
+`;
+
+export const LikeBtn = styled.button`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: ${(props) => props.theme.white.lighter};
+  background-color: transparent;
+  outline: none;
+  border: 1px solid ${(props) => props.theme.white.lighter};
+  margin-right: 30px;
+`;
+
+export const Average = styled.div`
+  font-size: 20px;
+  :first-child {
+    color: yellow;
+  }
 `;
 
 export const ModalDescription = styled.p`
@@ -41,4 +101,5 @@ export const Overlay = styled(motion.div)`
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: 5;
 `;

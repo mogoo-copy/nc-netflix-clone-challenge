@@ -44,9 +44,9 @@ function MovieLists() {
   const navigate = useNavigate();
   const movieModalMatch = useMatch("/movies/:movieId");
 
-  const clickedSliderBox =
-    movieModalMatch?.params.movieId &&
-    chosenData?.results.find((movie) => String(movie.id) === movieModalMatch.params.movieId);
+  const clickedSliderBox = movieModalMatch?.params.movieId
+    ? chosenData?.results.find((movie) => String(movie.id) === movieModalMatch.params.movieId)
+    : undefined;
 
   const handleClickSliderBox =
     (movieId: number, movieData: MoviesResponse, slider: string) => () => {
@@ -151,7 +151,7 @@ function MovieLists() {
           </Container>
           <AnimatePresence>
             {movieModalMatch ? (
-              <Modal clickedSliderBox={clickedSliderBox} slider={chosenSlider} />
+              <Modal clickedSliderBox={clickedSliderBox} slider={chosenSlider} isMovie={true} />
             ) : null}
           </AnimatePresence>
         </>

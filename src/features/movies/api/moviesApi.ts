@@ -19,6 +19,10 @@ const moviesApi = tmdbApi.injectEndpoints({
       query: () => "movie/upcoming",
       providesTags: ["Movie"],
     }),
+    getMovieDetail: builder.query<MovieDetail, string>({
+      query: (movieId) => `movie/${movieId}`,
+      providesTags: ["Movie"],
+    }),
   }),
 });
 
@@ -27,4 +31,5 @@ export const {
   useGetPopularQuery,
   useGetTopRatedQuery,
   useGetUpcomingQuery,
+  useGetMovieDetailQuery,
 } = moviesApi;
