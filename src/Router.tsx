@@ -1,11 +1,11 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 
 import App from "./App";
 import Movies from "./pages/Movies";
 import Tvs from "./pages/Tvs";
 import Search from "./pages/Search";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App />,
